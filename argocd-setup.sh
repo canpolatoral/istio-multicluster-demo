@@ -21,16 +21,13 @@ installArgoCDApps() {
   
     local context=${1}
 
-      helm upgrade --install argocd-apps ./charts/argocd-apps \
-      --wait \
-      --kube-context="${context}" \
-      --namespace=argocd
+    values_cluster="${context/kind/values}"
 
-    #   helm upgrade --install argocd-apps ./charts/argocd-apps \
-    #   --wait \
-    #   --kube-context=kind-cluster1 \
-    #   --namespace=argocd \
-    #   --dry-run --debug
+    helm upgrade --install argocd-apps ./charts/argocd-apps \
+    --wait \
+    --kube-context="${context}" \
+    --values=./charts/argocd-apps/"${values_cluster}".yaml \
+    --namespace=argocd
 }
 
 setupRemoteSecret() {

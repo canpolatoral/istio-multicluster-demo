@@ -1,1 +1,2 @@
-kubelet-insecure-tls: true
+metrics-server:
+  kubelet-insecure-tls: true
