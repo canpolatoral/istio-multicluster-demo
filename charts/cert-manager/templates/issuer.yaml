@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: istio-ca
+  namespace: istio-system
+spec:
+  vault:
+    server: http://host.docker.internal:8200
+    path: pki_int_{{ .Values.clusterName }}/sign/istio-ca-{{ .Values.clusterName }}
+    auth:
+      kubernetes:
+        mountPath: /v1/auth/{{ .Values.context }}
+        role: issuer
+        secretRef:
+          name: issuer-token-lmzpj
+          key: token

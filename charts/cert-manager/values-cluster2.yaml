@@ -1,0 +1,9 @@
+context: kind-cluster2
+clusterName: istio-cluster2
+
+global:
+  logLevel: 6
+
+cert-manager:
+  crds:
+    enabled: true
