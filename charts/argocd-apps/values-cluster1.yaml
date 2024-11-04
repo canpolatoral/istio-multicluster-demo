@@ -5,11 +5,32 @@ argocd-apps:
       argocd.argoproj.io/sync-wave: "0"    
     namespace: argocd
     destination:
-      namespace: cert-manager
+      namespace: argocd
       server: https://kubernetes.default.svc
     project: kube-system
     source:                 
       path: charts/argocd
+      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+      targetRevision: HEAD 
+      extraSourceFields: |
+        helm:
+          valueFiles:
+          - values.yaml  
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true  
+
+  - name: argocd-apps
+    annotations:
+      argocd.argoproj.io/sync-wave: "0"    
+    namespace: argocd
+    destination:
+      namespace: argocd
+      server: https://kubernetes.default.svc
+    project: kube-system
+    source:                 
+      path: charts/argocd-apps
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
       extraSourceFields: |
@@ -26,9 +47,9 @@ argocd-apps:
       argocd.argoproj.io/sync-wave: "0"    
     namespace: argocd
     destination:
-      namespace: cert-manager
+      namespace: kube-system
       server: https://kubernetes.default.svc
-    project: kube-system
+    project: argocd
     source:                 
       path: charts/metrics-server
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git

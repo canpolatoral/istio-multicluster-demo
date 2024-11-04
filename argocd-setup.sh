@@ -11,7 +11,7 @@ setupArgoCD() {
 
     kubectl create namespace argocd --context=${context}
 
-    helm upgrade --install argocd-apps ./charts/argocd \
+    helm upgrade --install argocd ./charts/argocd \
       --wait \
       --kube-context="${context}" \
       --namespace=argocd
