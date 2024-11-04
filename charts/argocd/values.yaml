@@ -5,4 +5,4 @@ argo-cd:
 
   configs: 
     secret:
-      argocdServerAdminPassword: $2a$10$$2a$10$VPqURJ1AeFbD7MbpR555Me1OrlhOA9OqNAXvacWKkv8C0tGXLSJ2S% #password
+      argocdServerAdminPassword: $2a$10$$2a$10$VPqURJ1AeFbD7MbpR555Me1OrlhOA9OqNAXvacWKkv8C0tGXLSJ2S #password
