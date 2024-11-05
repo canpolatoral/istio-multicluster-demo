@@ -10,9 +10,19 @@ createClusters() {
   kind create cluster --name cluster2
 }
 
+setupInitialNamespaces() {
+    
+    local context=${1}
+    kubectl create namespace istio-system --context="${context}"
+    kubectl create namespace cert-manager --context="${context}"
+}
+
 main() {
 
   createClusters
+
+  setupInitialNamespaces ${CTX_CLUSTER1}
+  setupInitialNamespaces ${CTX_CLUSTER2}
 }
 
 main

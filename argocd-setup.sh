@@ -26,6 +26,7 @@ installArgoCDApps() {
     helm upgrade --install argocd-apps ./charts/argocd-apps \
     --wait \
     --kube-context="${context}" \
+    --values=./charts/argocd-apps/values-base.yaml \
     --values=./charts/argocd-apps/"${values_cluster}".yaml \
     --namespace=argocd
 }
@@ -46,16 +47,7 @@ setupRemoteSecret() {
         kubectl apply -f - --context=${cluster2context}
 }
 
-setupIstioNamespace() {
-    
-    local context=${1}
-    kubectl create namespace istio-system --context="${context}"
-}
-
 main() {
-
-    setupIstioNamespace ${CTX_CLUSTER1}
-    setupIstioNamespace ${CTX_CLUSTER2}
 
     setupRemoteSecret ${CTX_CLUSTER1} ${CTX_CLUSTER2}
     setupRemoteSecret ${CTX_CLUSTER2} ${CTX_CLUSTER1}
