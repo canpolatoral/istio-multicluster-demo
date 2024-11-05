@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: istio-ca
-  namespace: istio-system
+  namespace: {{.Release.Namespace}}
 spec:
   vault:
     server: http://host.docker.internal:8200
