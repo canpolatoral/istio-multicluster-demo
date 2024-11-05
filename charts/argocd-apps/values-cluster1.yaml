@@ -7,7 +7,7 @@ argocd-apps:
     destination:
       namespace: argocd
       server: https://kubernetes.default.svc
-    project: kube-system
+    project: argocd
     source:                 
       path: charts/argocd
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
@@ -28,7 +28,7 @@ argocd-apps:
     destination:
       namespace: argocd
       server: https://kubernetes.default.svc
-    project: kube-system
+    project: argocd
     source:                 
       path: charts/argocd-apps
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
