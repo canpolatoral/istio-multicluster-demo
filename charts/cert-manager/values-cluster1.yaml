@@ -5,7 +5,6 @@ global:
   logLevel: 6
 
 cert-manager:
-  installCRDs: true
   crds:
     enabled: true
 
