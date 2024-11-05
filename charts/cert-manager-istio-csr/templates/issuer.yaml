@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: istio-ca
-  namespace: {{.Release.Namespace}}
+  namespace: {{ .Values.istioNamespace }}
 spec:
   vault:
     server: {{ .Values.vaultServer }}
