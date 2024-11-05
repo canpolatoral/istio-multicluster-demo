@@ -33,10 +33,11 @@ argocd-apps:
       path: charts/argocd-apps
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - values.yaml  
+      helm:
+        version: v3
+        valueFiles:
+        - values-base.yaml
+        - values-cluster1.yaml  
     syncPolicy:
       automated:
         selfHeal: true
@@ -54,10 +55,10 @@ argocd-apps:
       path: charts/metrics-server
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - values.yaml  
+      helm:
+        version: v3
+        valueFiles:
+        - values.yaml 
     syncPolicy:
       automated:
         selfHeal: true
@@ -75,10 +76,10 @@ argocd-apps:
       path: charts/cert-manager
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - values-cluster1.yaml  
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster1.yaml 
     syncPolicy:
       automated:
         selfHeal: true
@@ -96,10 +97,10 @@ argocd-apps:
       path: charts/cert-manager-istio-csr
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD  
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - values-cluster1.yaml  
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster1.yaml  
     syncPolicy:
       automated:
         selfHeal: true
@@ -117,10 +118,10 @@ argocd-apps:
       path: charts/istio/base
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD  
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - values-cluster1.yaml  
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster1.yaml 
     syncPolicy:
       automated:
         selfHeal: true
@@ -138,10 +139,10 @@ argocd-apps:
       path: charts/istio/istiod
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - values-cluster1.yaml    
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster1.yaml   
     syncPolicy:
       automated:
         selfHeal: true
@@ -159,10 +160,10 @@ argocd-apps:
       path: charts/istio/gateway
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD  
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - values-cluster1.yaml  
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster1.yaml 
     syncPolicy:
       automated:
         selfHeal: true
