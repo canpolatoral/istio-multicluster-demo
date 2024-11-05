@@ -90,7 +90,7 @@ argocd-apps:
       argocd.argoproj.io/sync-wave: "2"    
     namespace: argocd
     destination:
-      namespace: cert-manager
+      namespace: istio-system
       server: https://kubernetes.default.svc
     project: argocd
     source:                 
