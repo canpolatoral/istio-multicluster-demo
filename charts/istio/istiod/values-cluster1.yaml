@@ -398,7 +398,7 @@ istiod:
     # The customized CA address to retrieve certificates for the pods in the cluster.
     # CSR clients such as the Istio Agent and ingress gateways can use this to specify the CA endpoint.
     # If not set explicitly, default to the Istio discovery address.
-    caAddress: "cert-manager-istio-csr.cert-manager.svc:443"
+    caAddress: "cert-manager-istio-csr.istio-system.svc:443"
 
     # Enable control of remote clusters.
     externalIstiod: false
