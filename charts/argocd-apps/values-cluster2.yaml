@@ -1,25 +1,25 @@
 argocd-apps:
   applications: 
-  - name: argocd
-    annotations:
-      argocd.argoproj.io/sync-wave: "0"    
-    namespace: argocd
-    destination:
-      namespace: argocd
-      server: https://kubernetes.default.svc
-    project: argocd
-    source:                 
-      path: charts/argocd
-      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-      targetRevision: HEAD 
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - values.yaml  
-    syncPolicy:
-      automated:
-        selfHeal: true
-        prune: true  
+  # - name: argocd
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "0"    
+  #   namespace: argocd
+  #   destination:
+  #     namespace: argocd
+  #     server: https://kubernetes.default.svc
+  #   project: argocd
+  #   source:                 
+  #     path: charts/argocd
+  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+  #     targetRevision: HEAD 
+  #     extraSourceFields: |
+  #       helm:
+  #         valueFiles:
+  #         - values.yaml  
+  #   syncPolicy:
+  #     automated:
+  #       selfHeal: true
+  #       prune: true  
 
   - name: argocd-apps
     annotations:
@@ -62,7 +62,9 @@ argocd-apps:
     syncPolicy:
       automated:
         selfHeal: true
-        prune: true     
+        prune: true   
+      syncOptions:
+      - Validate=true   
 
   - name: cert-manager
     annotations:
@@ -83,7 +85,9 @@ argocd-apps:
     syncPolicy:
       automated:
         selfHeal: true
-        prune: true     
+        prune: true 
+      syncOptions:
+      - Validate=true     
 
   - name: istio-csr
     annotations:
@@ -104,7 +108,9 @@ argocd-apps:
     syncPolicy:
       automated:
         selfHeal: true
-        prune: true    
+        prune: true 
+    syncOptions:
+      - Validate=true    
 
   - name: istio-base
     annotations:
@@ -125,7 +131,9 @@ argocd-apps:
     syncPolicy:
       automated:
         selfHeal: true
-        prune: true      
+        prune: true    
+      syncOptions:
+      - Validate=true   
 
   - name: istiod
     annotations:
@@ -146,7 +154,9 @@ argocd-apps:
     syncPolicy:
       automated:
         selfHeal: true
-        prune: true     
+        prune: true    
+      syncOptions:
+      - Validate=true 
 
   - name: istio-eastwestgateway
     annotations:
@@ -167,4 +177,6 @@ argocd-apps:
     syncPolicy:
       automated:
         selfHeal: true
-        prune: true     
+        prune: true  
+      syncOptions:
+      - Validate=true    
