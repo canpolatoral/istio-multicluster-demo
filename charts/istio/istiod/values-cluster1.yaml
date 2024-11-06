@@ -1,3 +1,7 @@
+vaultServer: http://host.docker.internal:8200
+context: kind-cluster1
+clusterName: istio-cluster1
+
 istiod:
   autoscaleEnabled: true
   autoscaleMin: 1
