@@ -1,16 +1,16 @@
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: istio-ca
-  namespace: {{ .Values.istioNamespace }}
-spec:
-  vault:
-    server: {{ .Values.vaultServer }}
-    path: pki_int_{{ .Values.clusterName }}/sign/istio-ca-{{ .Values.clusterName }}
-    auth:
-      kubernetes:
-        mountPath: /v1/auth/{{ .Values.context }}
-        role: issuer
-        secretRef:
-          name: issuer-token-lmzpj
-          key: token
+# apiVersion: cert-manager.io/v1
+# kind: Issuer
+# metadata:
+#   name: istio-ca
+#   namespace: {{ .Values.istioNamespace }}
+# spec:
+#   vault:
+#     server: {{ .Values.vaultServer }}
+#     path: pki_int_{{ .Values.clusterName }}/sign/istio-ca-{{ .Values.clusterName }}
+#     auth:
+#       kubernetes:
+#         mountPath: /v1/auth/{{ .Values.context }}
+#         role: issuer
+#         secretRef:
+#           name: issuer-token-lmzpj
+#           key: token
