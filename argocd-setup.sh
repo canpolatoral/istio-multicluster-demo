@@ -31,26 +31,26 @@ installArgoCDApps() {
     --namespace=argocd
 }
 
-setupRemoteSecret() {
+# setupRemoteSecret() {
 
-    local cluster1context=${1}
-    local cluster2context=${2}
+#     local cluster1context=${1}
+#     local cluster2context=${2}
 
-    local apiServerIP=$(kubectl --context=${cluster1context} get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].status.podIP}')
+#     local apiServerIP=$(kubectl --context=${cluster1context} get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].status.podIP}')
 
-    local istioClusterName="${cluster1context/kind/istio}"
+#     local istioClusterName="${cluster1context/kind/istio}"
 
-    istioctl create-remote-secret \
-        --context=${cluster1context} \
-        --server=https://${apiServerIP}:6443 \
-        --name=${istioClusterName} | \
-        kubectl apply -f - --context=${cluster2context}
-}
+#     istioctl create-remote-secret \
+#         --context=${cluster1context} \
+#         --server=https://${apiServerIP}:6443 \
+#         --name=${istioClusterName} | \
+#         kubectl apply -f - --context=${cluster2context}
+# }
 
 main() {
 
-    setupRemoteSecret ${CTX_CLUSTER1} ${CTX_CLUSTER2}
-    setupRemoteSecret ${CTX_CLUSTER2} ${CTX_CLUSTER1}
+    # setupRemoteSecret ${CTX_CLUSTER1} ${CTX_CLUSTER2}
+    # setupRemoteSecret ${CTX_CLUSTER2} ${CTX_CLUSTER1}
 
     setupArgoCD ${CTX_CLUSTER1}
     setupArgoCD ${CTX_CLUSTER2}

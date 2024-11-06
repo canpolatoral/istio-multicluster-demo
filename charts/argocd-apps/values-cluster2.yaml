@@ -1,5 +1,48 @@
 argocd-apps:
   applications: 
+  - name: account-service
+    annotations:
+      argocd.argoproj.io/sync-wave: "0"    
+    namespace: argocd
+    destination:
+      namespace: account
+      server: https://kubernetes.default.svc
+    project: argocd
+    source:                 
+      path: charts/banking/account
+      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+      targetRevision: HEAD 
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster2.yaml 
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true 
+
+  - name: transfer-service
+    annotations:
+      argocd.argoproj.io/sync-wave: "0"    
+    namespace: argocd
+    destination:
+      namespace: transfer
+      server: https://kubernetes.default.svc
+    project: argocd
+    source:                 
+      path: charts/banking/transfer
+      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+      targetRevision: HEAD 
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster2.yaml 
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true 
+
+
   # - name: argocd
   #   annotations:
   #     argocd.argoproj.io/sync-wave: "0"    

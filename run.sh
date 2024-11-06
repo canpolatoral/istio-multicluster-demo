@@ -3,4 +3,4 @@
 ./vault-configure.sh
 ./cert-manager-setup.sh
 ./istio-setup.sh
-# ./argocd-setup.sh
+./argocd-setup.sh
