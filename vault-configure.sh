@@ -51,7 +51,7 @@ setupVaultIntegration() {
 
   vault auth enable --path=${context} kubernetes  
 
-  SA_JWT_TOKEN=$(kubectl --context=${context} get secret issuer-token-lmzpj -n cert-manager --output 'go-template={{ .data.token }}' | base64 --decode)
+  SA_JWT_TOKEN=$(kubectl --context=${context} get secret issuer-token-lmzpj -n istio-system --output 'go-template={{ .data.token }}' | base64 --decode)
   KUBE_HOST=$(kubectl --context=${context} config view --minify | grep server | cut -f 2- -d ":" | tr -d " ") 
   KUBE_CA_CERT_DECODED=$(kubectl --context=${context} config view --raw --minify --flatten --output='jsonpath={.clusters[].cluster.certificate-authority-data}' | base64 --decode)
   KUBE_CA_CERT=$(kubectl --context=${context} config view --raw --minify --flatten --output='jsonpath={.clusters[].cluster.certificate-authority-data}')
@@ -68,7 +68,7 @@ EOF
 
   vault write auth/${context}/role/issuer \
       bound_service_account_names=issuer \
-      bound_service_account_namespaces=cert-manager \
+      bound_service_account_namespaces=istio-system \
       policies=pki_int_${clustername} \
       ttl=20m
 }
@@ -84,7 +84,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: issuer
-  namespace: cert-manager
+  namespace: istio-system
 EOF
 
   kubectl apply --context=${context} -f - <<EOF
@@ -92,7 +92,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: issuer-token-lmzpj
-  namespace: cert-manager
+  namespace: istio-system
   annotations:
     kubernetes.io/service-account.name: issuer
 type: kubernetes.io/service-account-token
@@ -103,7 +103,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: role-tokenreview-binding
-  namespace: cert-manager
+  namespace: istio-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -111,7 +111,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: issuer
-    namespace: cert-manager
+    namespace: istio-system
 EOF
 
 }
