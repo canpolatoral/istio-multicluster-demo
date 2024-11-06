@@ -63,8 +63,7 @@ argocd-apps:
       automated:
         selfHeal: true
         prune: true   
-      syncOptions:
-      - Validate=true   
+  
 
   - name: cert-manager
     annotations:
@@ -86,8 +85,7 @@ argocd-apps:
       automated:
         selfHeal: true
         prune: true 
-      syncOptions:
-      - Validate=true     
+    
 
   - name: istio-csr
     annotations:
@@ -132,8 +130,7 @@ argocd-apps:
       automated:
         selfHeal: true
         prune: true    
-      syncOptions:
-      - Validate=true   
+  
 
   - name: istiod
     annotations:
@@ -155,8 +152,7 @@ argocd-apps:
       automated:
         selfHeal: true
         prune: true    
-      syncOptions:
-      - Validate=true 
+
 
   - name: istio-eastwestgateway
     annotations:
@@ -178,5 +174,4 @@ argocd-apps:
       automated:
         selfHeal: true
         prune: true  
-      syncOptions:
-      - Validate=true    
+   
