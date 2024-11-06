@@ -124,7 +124,7 @@ cert-manager-istio-csr:
     certmanager:
       # Namespace to create CertificateRequests for both istio-csr's serving
       # certificate and incoming gRPC CSRs.
-      namespace: cert-manager
+      namespace: istio-system
       # Don't delete created CertificateRequests once they have been signed.
       # WARNING: do not enable this option in production, or environments with
       # any non-trivial number of workloads for an extended period of time. Doing
