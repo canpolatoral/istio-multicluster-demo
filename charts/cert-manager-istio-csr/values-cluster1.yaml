@@ -1,3 +1,8 @@
+vaultServer: http://host.docker.internal:8200
+context: kind-cluster1
+clusterName: istio-cluster1
+istioNamespace: istio-system
+
 cert-manager-istio-csr:
   # nameOverride replaces the name of the chart in the Chart.yaml file, when this
   # is used to construct Kubernetes object names.
