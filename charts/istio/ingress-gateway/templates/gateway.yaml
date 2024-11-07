@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: ingress-gateway
-  namespace: {{.Release.Namespace}} # Optional, could be in any namespace
+  namespace: istio-system
 spec:
   selector:
     istio: ingressgateway  # Selects the default ingress gateway in the istio-system namespace
@@ -11,3 +11,5 @@ spec:
         number: 80
         name: http
         protocol: HTTP
+      hosts:
+        - "*"  
