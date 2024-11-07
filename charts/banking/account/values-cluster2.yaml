@@ -6,6 +6,9 @@ replicaCount: 1
 
 istioInjection: "enabled"
 
+mtls:
+  mode: STRICT
+
 image:
   repository: canpolatoral/account-service
   pullPolicy: IfNotPresent
