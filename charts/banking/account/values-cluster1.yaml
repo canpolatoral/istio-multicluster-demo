@@ -16,7 +16,7 @@ env:
   - name: PORT
     value: "80"
   - name: VERSION
-    value: "ABU DHABI"
+    value: "MEYDAN"
 
 imagePullSecrets: []
 nameOverride: ""
