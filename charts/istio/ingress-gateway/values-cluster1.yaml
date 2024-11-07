@@ -95,7 +95,7 @@ gateway:
 
   # Labels to apply to all resources
   labels: 
-    istio: ingress
+    istio: ingressgateway
 
   # Annotations to apply to all resources
   annotations: {}
