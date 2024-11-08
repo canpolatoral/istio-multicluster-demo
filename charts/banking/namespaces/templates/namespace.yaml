@@ -1,0 +1,8 @@
+{{- range $namespace, $config := .Values.namespaces }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $namespace | quote }}
+  labels:
+{{ toYaml $config.labels | indent 4 }}
+{{- end }}

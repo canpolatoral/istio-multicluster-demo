@@ -1,39 +1,14 @@
-# Default values for account.
+# Default values for gateways.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
-mtls:
-  mode: STRICT
-
 image:
-  repository: canpolatoral/account-service
+  repository: nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
-
-env:
-  - name: PORT
-    value: "80"
-  - name: VERSION
-    value: "MEYDAN"
-
-virtualService:
-  hosts:
-    - "multicluster.mydemo.com"
-  gateways:
-    - "istio-system/ingress-gateway"
-  http:
-    match:
-      prefix: "/account"
-    rewrite:
-      uri: "/"
-    route:
-      destination:
-        host: "account-service.account.svc.cluster.local"
-        port:
-          number: 80
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""

@@ -63,20 +63,30 @@ setupRemoteSecret() {
         kubectl apply -f - --context=${cluster2context}
 }
 
-#todo gitops
+setupIngressGateway() {
+    local context=${1}
+
+    values_cluster="${context/kind/values}"
+
+    helm upgrade istio-ingressgateway ./charts/istio/ingress-gateway \
+        --install \
+        --wait \
+        --values=./charts/istio/ingress-gateway/"${values_cluster}".yaml \
+        --namespace istio-system \
+        --kube-context=${context} 
+}
+
 setupEastWestGateway() {
     local context=${1}
 
     values_cluster="${context/kind/values}"
 
-    helm upgrade istio-eastwestgateway ./charts/istio/gateway \
+    helm upgrade istio-eastwestgateway ./charts/istio/eastwest-gateway \
         --install \
         --wait \
-        --values=./charts/istio/gateway/"${values_cluster}".yaml \
+        --values=./charts/istio/eastwest-gateway/"${values_cluster}".yaml \
         --namespace istio-system \
         --kube-context=${context} 
-
-    # kubectl --context=${context} apply -f ./${context}/gateway/gateway.yaml
 }
 
 main() {
@@ -92,6 +102,9 @@ main() {
 
     setupRemoteSecret ${CTX_CLUSTER1} ${CTX_CLUSTER2}
     setupRemoteSecret ${CTX_CLUSTER2} ${CTX_CLUSTER1}
+
+    setupIngressGateway ${CTX_CLUSTER1}
+    setupIngressGateway ${CTX_CLUSTER2}
 
     setupEastWestGateway ${CTX_CLUSTER1}
     setupEastWestGateway ${CTX_CLUSTER2}

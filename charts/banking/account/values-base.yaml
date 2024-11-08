@@ -13,12 +13,6 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-env:
-  - name: PORT
-    value: "80"
-  - name: VERSION
-    value: "MEYDAN"
-
 virtualService:
   hosts:
     - "multicluster.mydemo.com"

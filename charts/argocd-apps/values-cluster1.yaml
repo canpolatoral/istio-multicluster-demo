@@ -1,8 +1,52 @@
 argocd-apps:
   applications: 
-  - name: account-service
+
+  - name: namespaces
     annotations:
       argocd.argoproj.io/sync-wave: "0"    
+    namespace: argocd
+    destination:
+      namespace: default
+      server: https://kubernetes.default.svc
+    project: argocd
+    source:                 
+      path: charts/banking/namespaces
+      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+      targetRevision: HEAD 
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster1.yaml 
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true 
+
+  - name: gateways
+    annotations:
+      argocd.argoproj.io/sync-wave: "1"    
+    namespace: argocd
+    destination:
+      namespace: istio-system
+      server: https://kubernetes.default.svc
+    project: argocd
+    source:                 
+      path: charts/banking/gateways
+      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+      targetRevision: HEAD 
+      helm:
+        version: v3
+        valueFiles:
+        - values-cluster1.yaml 
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true 
+
+
+  - name: account-service
+    annotations:
+      argocd.argoproj.io/sync-wave: "2"    
     namespace: argocd
     destination:
       namespace: account
@@ -15,6 +59,7 @@ argocd-apps:
       helm:
         version: v3
         valueFiles:
+        - values-base.yaml
         - values-cluster1.yaml 
     syncPolicy:
       automated:
@@ -23,7 +68,7 @@ argocd-apps:
 
   - name: transfer-service
     annotations:
-      argocd.argoproj.io/sync-wave: "0"    
+      argocd.argoproj.io/sync-wave: "2"    
     namespace: argocd
     destination:
       namespace: transfer
@@ -36,36 +81,16 @@ argocd-apps:
       helm:
         version: v3
         valueFiles:
+        - values-base.yaml
         - values-cluster1.yaml 
     syncPolicy:
       automated:
         selfHeal: true
         prune: true 
 
-  # - name: argocd
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "0"    
-  #   namespace: argocd
-  #   destination:
-  #     namespace: argocd
-  #     server: https://kubernetes.default.svc
-  #   project: argocd
-  #   source:                 
-  #     path: charts/argocd
-  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-  #     targetRevision: HEAD 
-  #     extraSourceFields: |
-  #       helm:
-  #         valueFiles:
-  #         - values.yaml  
-  #   syncPolicy:
-  #     automated:
-  #       selfHeal: true
-  #       prune: true  
-
   - name: argocd-apps
     annotations:
-      argocd.argoproj.io/sync-wave: "0"    
+      argocd.argoproj.io/sync-wave: "3"    
     namespace: argocd
     destination:
       namespace: argocd
@@ -84,136 +109,3 @@ argocd-apps:
       automated:
         selfHeal: true
         prune: true    
-
-  # - name: metrics-server
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "0"    
-  #   namespace: argocd
-  #   destination:
-  #     namespace: kube-system
-  #     server: https://kubernetes.default.svc
-  #   project: argocd
-  #   source:                 
-  #     path: charts/metrics-server
-  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-  #     targetRevision: HEAD 
-  #     helm:
-  #       version: v3
-  #       valueFiles:
-  #       - values.yaml 
-  #   syncPolicy:
-  #     automated:
-  #       selfHeal: true
-  #       prune: true   
-  
-
-  # - name: cert-manager
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "1"    
-  #   namespace: argocd
-  #   destination:
-  #     namespace: cert-manager
-  #     server: https://kubernetes.default.svc
-  #   project: argocd
-  #   source:                 
-  #     path: charts/cert-manager
-  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-  #     targetRevision: HEAD 
-  #     helm:
-  #       version: v3
-  #       valueFiles:
-  #       - values-cluster1.yaml 
-  #   syncPolicy:
-  #     automated:
-  #       selfHeal: true
-  #       prune: true 
-    
-
-  # - name: istio-csr
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "2"    
-  #   namespace: argocd
-  #   destination:
-  #     namespace: cert-manager
-  #     server: https://kubernetes.default.svc
-  #   project: argocd
-  #   source:                 
-  #     path: charts/cert-manager-istio-csr
-  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-  #     targetRevision: HEAD  
-  #     helm:
-  #       version: v3
-  #       valueFiles:
-  #       - values-cluster1.yaml  
-  #   syncPolicy:
-  #     automated:
-  #       selfHeal: true
-  #       prune: true 
-  #   syncOptions:
-  #     - Validate=true    
-
-  # - name: istio-base
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "3"    
-  #   namespace: argocd
-  #   destination:
-  #     namespace: istio-system
-  #     server: https://kubernetes.default.svc
-  #   project: argocd
-  #   source:                 
-  #     path: charts/istio/base
-  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-  #     targetRevision: HEAD  
-  #     helm:
-  #       version: v3
-  #       valueFiles:
-  #       - values-cluster1.yaml 
-  #   syncPolicy:
-  #     automated:
-  #       selfHeal: true
-  #       prune: true    
-  
-
-  # - name: istiod
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "4"    
-  #   namespace: argocd
-  #   destination:
-  #     namespace: istio-system
-  #     server: https://kubernetes.default.svc
-  #   project: argocd
-  #   source:                 
-  #     path: charts/istio/istiod
-  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-  #     targetRevision: HEAD 
-  #     helm:
-  #       version: v3
-  #       valueFiles:
-  #       - values-cluster1.yaml   
-  #   syncPolicy:
-  #     automated:
-  #       selfHeal: true
-  #       prune: true    
-
-
-  # - name: istio-eastwestgateway
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "5"    
-  #   namespace: argocd
-  #   destination:
-  #     namespace: istio-system
-  #     server: https://kubernetes.default.svc
-  #   project: argocd
-  #   source:                 
-  #     path: charts/istio/gateway
-  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-  #     targetRevision: HEAD  
-  #     helm:
-  #       version: v3
-  #       valueFiles:
-  #       - values-cluster1.yaml 
-  #   syncPolicy:
-  #     automated:
-  #       selfHeal: true
-  #       prune: true  
-   

@@ -1,0 +1,7 @@
+namespaces:
+  account:
+    labels: 
+      istio-injection: enabled
+  transfer:
+    labels: 
+      istio-injection: enabled

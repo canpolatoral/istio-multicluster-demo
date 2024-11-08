@@ -1,0 +1,26 @@
+{{- range .Values.gateways }}
+---
+apiVersion: {{ .apiVersion }}
+kind: Gateway
+metadata:
+  name: {{ .name }}
+  namespace: {{ .namespace }}
+spec:
+  selector:
+    {{- toYaml .selector | nindent 4 }}
+  servers:
+    {{- range .servers }}
+    - port:
+        number: {{ .port.number }}
+        name: {{ .port.name }}
+        protocol: {{ .port.protocol }}
+      {{- if .tls }}
+      tls:
+        mode: {{ .tls.mode }}
+      {{- end }}
+      hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+    {{- end }}
+{{- end }}

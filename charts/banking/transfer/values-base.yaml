@@ -1,23 +1,20 @@
-# Default values for account.
+# Default values for transfer.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
+istioInjection: "enabled"
+
 mtls:
   mode: STRICT
 
 image:
-  repository: canpolatoral/account-service
+  repository: canpolatoral/transfer-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-env:
-  - name: PORT
-    value: "80"
-  - name: VERSION
-    value: "MEYDAN"
 
 virtualService:
   hosts:
@@ -26,12 +23,12 @@ virtualService:
     - "istio-system/ingress-gateway"
   http:
     match:
-      prefix: "/account"
+      prefix: "/transfer"
     rewrite:
       uri: "/"
     route:
       destination:
-        host: "account-service.account.svc.cluster.local"
+        host: "transfer-service.transfer.svc.cluster.local"
         port:
           number: 80
 
@@ -46,7 +43,7 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  tag: "latest"
 
 podAnnotations: {}
 
