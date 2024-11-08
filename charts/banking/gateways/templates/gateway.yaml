@@ -4,7 +4,6 @@ apiVersion: {{ .apiVersion }}
 kind: Gateway
 metadata:
   name: {{ .name }}
-  namespace: {{ .namespace }}
 spec:
   selector:
     {{- toYaml .selector | nindent 4 }}
