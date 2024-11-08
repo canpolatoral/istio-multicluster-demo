@@ -1,6 +1,8 @@
+{{- range $namespace, $config := .Values.namespaces }}
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: {{ .Release.Namespace }}
+  name: {{ $namespace | quote }}
   labels:
-    istio-injection: {{ .Values.istioInjection | default "disabled" }}
+{{ toYaml $config.labels | indent 4 }}
+{{- end }}
