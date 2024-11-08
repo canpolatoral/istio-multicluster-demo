@@ -109,7 +109,7 @@ gateway:
   affinity: {}
 
   # If specified, the gateway will act as a network gateway for the given network.
-  networkGateway: "network1"
+  networkGateway: ""
 
   # Specify image pull policy if default behavior isn't desired.
   # Default behavior: latest images will be Always else IfNotPresent
