@@ -1,4 +1,5 @@
 {{- range $namespace, $config := .Values.namespaces }}
+---
 apiVersion: v1
 kind: Namespace
 metadata:
