@@ -55,10 +55,10 @@ destinationRule:
 replicaCount: 1
 
 image:
-  repository: imagerepo
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "tage"
+  # repository: imagerepo
+  # pullPolicy: IfNotPresent
+  # # Overrides the image tag whose default is the chart appVersion.
+  # tag: "tage"
 
 imagePullSecrets: []
 nameOverride: ""
