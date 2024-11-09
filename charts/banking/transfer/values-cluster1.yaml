@@ -5,3 +5,24 @@ env:
     value: "http://account-service.account.svc"
   - name: VERSION
     value: "MEYDAN"
+
+destinationRule:
+  enabled: "true"
+
+  trafficPolicy:
+    connectionPool:
+      http:
+        maxRequestsPerConnection: 1
+
+    loadBalancer:
+      simple: ROUND_ROBIN
+      localityLbSetting:
+        enabled: true
+        failover:
+          - from: myd
+            to: auh
+
+    outlierDetection:
+      consecutive5xxErrors: 1
+      interval: "1s"
+      baseEjectionTime: "1m"

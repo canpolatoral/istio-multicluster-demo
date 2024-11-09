@@ -1,6 +1,5 @@
 gateways:
   - name: cross-network-gateway
-    namespace: "{{ .Release.Namespace }}"
     apiVersion: networking.istio.io/v1alpha3
     selector:
       istio: eastwestgateway
@@ -15,7 +14,6 @@ gateways:
           - "*.local"
 
   - name: ingress-gateway
-    namespace: "{{ .Release.Namespace }}"
     apiVersion: networking.istio.io/v1beta1
     selector:
       istio: ingressgateway

@@ -2,18 +2,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-
 mtls:
   mode: STRICT
 
-image:
-  repository: canpolatoral/account-service
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
-
 virtualService:
+  enabled: "true"
+
   hosts:
     - "multicluster.mydemo.com"
   gateways:
@@ -28,6 +22,14 @@ virtualService:
         host: "account-service.account.svc.cluster.local"
         port:
           number: 80
+
+replicaCount: 1
+
+image:
+  repository: canpolatoral/account-service
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""

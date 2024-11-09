@@ -1,20 +1,26 @@
-# Default values for account.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-replicaCount: 1
-
-mtls:
-  mode: STRICT
-
-image:
-  repository: canpolatoral/account-service
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
-
 env:
   - name: PORT
     value: "80"
   - name: VERSION
     value: "MEYDAN"
+
+destinationRule:
+  enabled: "true"
+
+  trafficPolicy:
+    connectionPool:
+      http:
+        maxRequestsPerConnection: 1
+
+    loadBalancer:
+      simple: ROUND_ROBIN
+      localityLbSetting:
+        enabled: true
+        failover:
+          - from: myd
+            to: auh
+
+    outlierDetection:
+      consecutive5xxErrors: 1
+      interval: "1s"
+      baseEjectionTime: "1m"
