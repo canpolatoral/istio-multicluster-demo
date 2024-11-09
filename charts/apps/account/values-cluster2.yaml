@@ -1,26 +1,28 @@
-env:
-  - name: PORT
-    value: "80"
-  - name: VERSION
-    value: "ABU DHABI"
+base-ms-chart:
 
-destinationRule:
-  enabled: true
+  env:
+    - name: PORT
+      value: "80"
+    - name: VERSION
+      value: "ABU DHABI"
 
-  trafficPolicy:
-    connectionPool:
-      http:
-        maxRequestsPerConnection: 1
+  destinationRule:
+    enabled: true
 
-    loadBalancer:
-      simple: ROUND_ROBIN
-      localityLbSetting:
-        enabled: true
-        failover:
-          - from: auh
-            to: myd
+    trafficPolicy:
+      connectionPool:
+        http:
+          maxRequestsPerConnection: 1
 
-    outlierDetection:
-      consecutive5xxErrors: 1
-      interval: "1s"
-      baseEjectionTime: "1m"
+      loadBalancer:
+        simple: ROUND_ROBIN
+        localityLbSetting:
+          enabled: true
+          failover:
+            - from: auh
+              to: myd
+
+      outlierDetection:
+        consecutive5xxErrors: 1
+        interval: "1s"
+        baseEjectionTime: "1m"
