@@ -3,7 +3,7 @@ name: Release Base MicroService Chart
 on:
   push:
     paths:
-      - charts/base/*
+      - charts/base/**
     branches:
       - main
 
