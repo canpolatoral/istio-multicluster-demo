@@ -52,7 +52,7 @@ destinationRule:
   #     interval: "1s"
   #     baseEjectionTime: "1m"
 
-replicaCount: 2
+replicaCount: 1
 
 image:
   # repository: imagerepo
