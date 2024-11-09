@@ -5,7 +5,7 @@ env:
     value: "ABU DHABI"
 
 destinationRule:
-  enabled: "true"
+  enabled: true
 
   trafficPolicy:
     connectionPool:

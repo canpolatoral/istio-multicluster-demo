@@ -6,7 +6,7 @@ mtls:
   mode: STRICT
 
 virtualService:
-  enabled: "true"
+  enabled: true
 
   hosts:
     - "multicluster.mydemo.com"
