@@ -2,6 +2,7 @@
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
+  name: {{ include "transfer.fullname" . }}
   host: {{ include "transfer.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
 spec:
   host: {{ .Values.destinationRule.host | quote }}
