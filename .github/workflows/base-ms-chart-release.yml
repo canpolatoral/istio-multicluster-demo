@@ -3,7 +3,7 @@ name: Release Base MicroService Chart
 on:
   push:
     paths:
-      - charts/apps/base-ms-chart/*
+      - charts/base/*
     branches:
       - main
 
@@ -26,6 +26,6 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
-          charts_dir: charts/apps/base-ms-chart
+          charts_dir: charts/base
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
