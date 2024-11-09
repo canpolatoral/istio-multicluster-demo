@@ -10,7 +10,7 @@ argocd-apps:
       server: https://kubernetes.default.svc
     project: argocd
     source:                 
-      path: charts/banking/namespaces
+      path: charts/apps/namespaces
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
       helm:
@@ -31,7 +31,7 @@ argocd-apps:
       server: https://kubernetes.default.svc
     project: argocd
     source:                 
-      path: charts/banking/gateways
+      path: charts/apps/gateways
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
       helm:
@@ -53,7 +53,7 @@ argocd-apps:
       server: https://kubernetes.default.svc
     project: argocd
     source:                 
-      path: charts/banking/account
+      path: charts/apps/account
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
       helm:
@@ -75,7 +75,7 @@ argocd-apps:
       server: https://kubernetes.default.svc
     project: argocd
     source:                 
-      path: charts/banking/transfer
+      path: charts/apps/transfer
       repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
       targetRevision: HEAD 
       helm:
