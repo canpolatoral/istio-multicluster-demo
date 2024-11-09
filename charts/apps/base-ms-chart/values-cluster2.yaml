@@ -1,0 +1,26 @@
+env:
+  - name: PORT
+    value: "80"
+  - name: VERSION
+    value: "ABU DHABI"
+
+destinationRule:
+  enabled: true
+
+  trafficPolicy:
+    connectionPool:
+      http:
+        maxRequestsPerConnection: 1
+
+    loadBalancer:
+      simple: ROUND_ROBIN
+      localityLbSetting:
+        enabled: true
+        failover:
+          - from: auh
+            to: myd
+
+    outlierDetection:
+      consecutive5xxErrors: 1
+      interval: "1s"
+      baseEjectionTime: "1m"
