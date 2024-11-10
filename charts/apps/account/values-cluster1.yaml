@@ -5,6 +5,8 @@ base-ms-chart:
       value: "80"
     - name: VERSION
       value: "MEYDAN"
+    - name: SERVICE_NAME
+      value: "Account Service"
 
   destinationRule:
     enabled: true
