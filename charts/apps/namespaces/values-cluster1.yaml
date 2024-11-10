@@ -5,3 +5,6 @@ namespaces:
   transfer:
     labels: 
       istio-injection: enabled
+  customer:
+    labels: 
+      istio-injection: enabled
