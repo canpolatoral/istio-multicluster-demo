@@ -3,7 +3,7 @@ base-ms-chart:
   env:
     - name: PORT
       value: "80"
-    - name: ACCOUNT_SERVICE_URL
+    - name: TARGET_SERVICE_URL
       value: "http://account-service.account.svc"
     - name: VERSION
       value: "MEYDAN"

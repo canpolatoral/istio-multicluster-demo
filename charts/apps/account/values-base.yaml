@@ -7,7 +7,7 @@ base-ms-chart:
   fullnameOverride: "account-service"
 
   image:
-    repository: canpolatoral/account-service
+    repository: canpolatoral/receiver-service
     pullPolicy: IfNotPresent
     tag: "latest"
 
