@@ -20,8 +20,8 @@ base-ms-chart:
     allowedSources:
       - namespace: transfer
         serviceAccount: transfer-service
-      - namespace: customer
-        serviceAccount: customer-service
+      # - namespace: customer
+      #   serviceAccount: customer-service
 
   virtualService:
     enabled: true
