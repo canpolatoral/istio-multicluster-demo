@@ -29,7 +29,7 @@ base-ms-chart:
         uri: "/"
       route:
         destination:
-          host: "transfer-service.transfer.svc.cluster.local"
+          host: "transfer-service-base-ms-chart.transfer.svc.cluster.local"
           port:
             number: 80
 

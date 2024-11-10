@@ -4,7 +4,7 @@ base-ms-chart:
     - name: PORT
       value: "80"
     - name: ACCOUNT_SERVICE_URL
-      value: "http://account-service.account.svc"
+      value: "http://account-service-base-ms-chart.account.svc"
     - name: VERSION
       value: "ABU DHABI"
 

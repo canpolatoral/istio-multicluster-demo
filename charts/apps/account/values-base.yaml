@@ -20,7 +20,7 @@ base-ms-chart:
         uri: "/"
       route:
         destination:
-          host: "account-service.account.svc.cluster.local"
+          host: "account-service-base-ms-chart.account.svc.cluster.local"
           port:
             number: 80
 
