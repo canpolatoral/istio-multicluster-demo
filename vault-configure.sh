@@ -6,6 +6,9 @@ set -o pipefail
 source ./env.sh
 
 createPkiRootCA() {
+
+    mkdir -p certs
+
     vault secrets enable -path=pki_root pki
 
     vault write -field=certificate pki_root/root/generate/internal \
