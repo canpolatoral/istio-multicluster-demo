@@ -1,0 +1,18 @@
+{{- if .Values.authorizationPolicy.enabled }}
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: {{ include "ms.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "ms.name" . }}
+  action: ALLOW
+  rules:
+{{- range .Values.authorizationPolicy.allowedSources }}
+  - from:
+    - source:
+        # namespaces: ["{{ .namespace }}"]
+        principals: ["cluster.local/ns/{{ .namespace }}/sa/{{ .serviceAccount }}"]
+{{- end }}
+{{- end }}

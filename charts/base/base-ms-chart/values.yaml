@@ -52,6 +52,16 @@ destinationRule:
   #     interval: "1s"
   #     baseEjectionTime: "1m"
 
+
+authorizationPolicy:
+  enabled: false
+
+  # allowedSources:
+  #   - namespace: transfer
+  #     serviceAccount: transfer-service-account
+  #   - namespace: customer
+  #     serviceAccount: payments-service-account
+
 replicaCount: 1
 
 image:
