@@ -88,6 +88,28 @@ argocd-apps:
         selfHeal: true
         prune: true 
 
+  - name: customer-service
+    annotations:
+      argocd.argoproj.io/sync-wave: "2"    
+    namespace: argocd
+    destination:
+      namespace: customer
+      server: https://kubernetes.default.svc
+    project: argocd
+    source:                 
+      path: charts/apps/customer
+      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+      targetRevision: HEAD 
+      helm:
+        version: v3
+        valueFiles:
+        - values-base.yaml
+        - values-cluster2.yaml 
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true 
+
   - name: argocd-apps
     annotations:
       argocd.argoproj.io/sync-wave: "3"    

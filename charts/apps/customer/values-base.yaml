@@ -1,0 +1,34 @@
+# Default values for transfer.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+base-ms-chart:
+
+  nameOverride: "customer-service"
+  fullnameOverride: "customer-service"
+
+  image:
+    repository: canpolatoral/transfer-service
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+
+  mtls:
+    mode: STRICT
+
+  virtualService:
+    enabled: true
+
+    hosts:
+      - "multicluster.mydemo.com"
+    gateways:
+      - "istio-system/ingress-gateway"
+    http:
+      match:
+        prefix: "/customer"
+      rewrite:
+        uri: "/"
+      route:
+        destination:
+          host: "customer-service.customer.svc.cluster.local"
+          port:
+            number: 80
