@@ -43,10 +43,30 @@ argocd-apps:
         selfHeal: true
         prune: true 
 
+  - name: kiali
+    annotations:
+      argocd.argoproj.io/sync-wave: "2"    
+    namespace: argocd
+    destination:
+      namespace: kiali-operator
+      server: https://kubernetes.default.svc
+    project: argocd
+    source:                 
+      path: charts/kiali-operator
+      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+      targetRevision: HEAD 
+      helm:
+        version: v3
+        valueFiles:
+        - values-base.yaml 
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true 
 
   - name: account-service
     annotations:
-      argocd.argoproj.io/sync-wave: "2"    
+      argocd.argoproj.io/sync-wave: "3"    
     namespace: argocd
     destination:
       namespace: account
@@ -68,7 +88,7 @@ argocd-apps:
 
   - name: transfer-service
     annotations:
-      argocd.argoproj.io/sync-wave: "2"    
+      argocd.argoproj.io/sync-wave: "4"    
     namespace: argocd
     destination:
       namespace: transfer
@@ -90,7 +110,7 @@ argocd-apps:
 
   - name: customer-service
     annotations:
-      argocd.argoproj.io/sync-wave: "2"    
+      argocd.argoproj.io/sync-wave: "5"    
     namespace: argocd
     destination:
       namespace: customer
@@ -112,7 +132,7 @@ argocd-apps:
 
   - name: argocd-apps
     annotations:
-      argocd.argoproj.io/sync-wave: "3"    
+      argocd.argoproj.io/sync-wave: "6"    
     namespace: argocd
     destination:
       namespace: argocd
