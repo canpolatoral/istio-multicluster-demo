@@ -26,7 +26,7 @@ base-ms-chart:
       match:
         prefix: "/customer"
       rewrite:
-        uri: "/"
+        uri: "/test"
       route:
         destination:
           host: "customer-service.customer.svc.cluster.local"
