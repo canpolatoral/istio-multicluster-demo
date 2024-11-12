@@ -9,7 +9,7 @@ base-ms-chart:
   image:
     repository: canpolatoral/receiver-service
     pullPolicy: IfNotPresent
-    tag: "latest"
+    tag: "1.0.0"
 
   mtls:
     mode: STRICT
