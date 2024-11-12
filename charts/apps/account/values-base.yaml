@@ -17,9 +17,9 @@ base-ms-chart:
   authorizationPolicy:
     enabled: true
 
-    allowedSources:
-      - namespace: transfer
-        serviceAccount: transfer-service
+    # allowedSources:
+    #   - namespace: transfer
+    #     serviceAccount: transfer-service
       # - namespace: customer
       #   serviceAccount: customer-service
 
