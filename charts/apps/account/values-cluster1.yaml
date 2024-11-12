@@ -7,6 +7,12 @@ base-ms-chart:
       value: "MEYDAN"
     - name: SERVICE_NAME
       value: "Account Service"
+    - name: ERROR_ENABLED
+      value: true
+    - name: ERROR_CODE
+      value: 500
+    - name: ERROR_MESSAGE
+      value: "Test error generated for LocalityLB"
 
   destinationRule:
     enabled: true
