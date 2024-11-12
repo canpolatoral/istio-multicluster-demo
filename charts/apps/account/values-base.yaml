@@ -20,6 +20,8 @@ base-ms-chart:
     allowedSources:
       - namespace: transfer
         serviceAccount: transfer-service
+      - namespace: istio-system
+        serviceAccount: istio-ingressgateway
       # - namespace: customer
       #   serviceAccount: customer-service
 
