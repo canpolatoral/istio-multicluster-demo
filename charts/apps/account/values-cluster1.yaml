@@ -9,7 +9,7 @@ base-ms-chart:
       value: "Account Service"
 
   destinationRule:
-    enabled: true
+    enabled: false
 
     trafficPolicy:
       connectionPool:
