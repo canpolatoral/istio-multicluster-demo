@@ -89,6 +89,12 @@ setupEastWestGateway() {
         --kube-context=${context} 
 }
 
+setupPrometheus() {
+    local context=${1}
+
+    kubectl --context=${context} apply -f https://raw.githubusercontent.com/istio/istio/release-1.24/samples/addons/prometheus.yaml
+}
+
 main() {
  
     setupIstioCSR ${CTX_CLUSTER1}
@@ -108,6 +114,9 @@ main() {
 
     setupEastWestGateway ${CTX_CLUSTER1}
     setupEastWestGateway ${CTX_CLUSTER2}
+
+    setupPrometheus ${CTX_CLUSTER1}
+    setupPrometheus ${CTX_CLUSTER2}
 }
 
 main
