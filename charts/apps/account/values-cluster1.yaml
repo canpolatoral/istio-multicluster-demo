@@ -8,9 +8,9 @@ base-ms-chart:
     - name: SERVICE_NAME
       value: "Account Service"
     - name: ERROR_ENABLED
-      value: true
+      value: "true"
     - name: ERROR_CODE
-      value: 500
+      value: "500"
     - name: ERROR_MESSAGE
       value: "Test error generated for LocalityLB"
 
