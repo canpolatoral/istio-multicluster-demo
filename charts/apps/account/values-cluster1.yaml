@@ -2,7 +2,7 @@ base-ms-chart:
 
   env:
     - name: PORT
-      value: "80"
+      value: "81"
     - name: VERSION
       value: "MEYDAN"
     - name: SERVICE_NAME
