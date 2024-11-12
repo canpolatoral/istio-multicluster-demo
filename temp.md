@@ -168,3 +168,8 @@ kubectl --context="$CTX_CLUSTER1" apply -f test/nginx-namespace.yaml
 kubectl --context="$CTX_CLUSTER1" apply -f test/nginx-deployment.yaml
 kubectl --context="$CTX_CLUSTER1" apply -f test/nginx-virtualservice.yaml
 
+istioctl --context $CTX_CLUSTER1 proxy-config endpoint transfer-service-575845f844-br7f7.transfer | grep account
+
+istioctl --context $CTX_CLUSTER1 proxy-config all transfer-service-575845f844-br7f7.transfer
+
+

@@ -8,13 +8,6 @@ base-ms-chart:
     - name: SERVICE_NAME
       value: "Account Service"
 
-  authorizationPolicy:
-    enabled: true
-
-    allowedSources:
-      - namespace: transfer
-        serviceAccount: transfer-service
-
   destinationRule:
     enabled: true
 
