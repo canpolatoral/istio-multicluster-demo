@@ -3,6 +3,14 @@
 # Declare variables to be passed into your templates.
 base-ms-chart:
 
+  resources:
+    requests:
+      cpu: "0m"
+      memory: "0Mi"
+    # limits:
+    #   cpu: "500m"
+    #   memory: "256Mi"
+
   nameOverride: "account-service"
   fullnameOverride: "account-service"
 
