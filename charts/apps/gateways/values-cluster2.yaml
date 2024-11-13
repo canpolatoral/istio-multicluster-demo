@@ -25,4 +25,4 @@ gateways:
           name: http
           protocol: HTTP
         hosts:
-          - "multicluster.mydemo.com"
+          - "cluster2.multicluster.com"

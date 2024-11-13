@@ -28,3 +28,21 @@ base-ms-chart:
         consecutive5xxErrors: 1
         interval: "1s"
         baseEjectionTime: "1m"
+
+  virtualService:
+    enabled: true
+
+    hosts:
+      - "cluster2.multicluster.com"
+    gateways:
+      - "istio-system/ingress-gateway"
+    http:
+      match:
+        prefix: "/account"
+      rewrite:
+        uri: "/test"
+      route:
+        destination:
+          host: "account-service.account.svc.cluster.local"
+          port:
+            number: 80

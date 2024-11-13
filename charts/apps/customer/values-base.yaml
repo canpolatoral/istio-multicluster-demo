@@ -14,21 +14,3 @@ base-ms-chart:
 
   mtls:
     mode: STRICT
-
-  virtualService:
-    enabled: true
-
-    hosts:
-      - "multicluster.mydemo.com"
-    gateways:
-      - "istio-system/ingress-gateway"
-    http:
-      match:
-        prefix: "/customer"
-      rewrite:
-        uri: "/test"
-      route:
-        destination:
-          host: "customer-service.customer.svc.cluster.local"
-          port:
-            number: 80
