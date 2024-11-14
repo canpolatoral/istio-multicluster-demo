@@ -6,5 +6,5 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   mtls:
-    mode: {{ .Values.mtls.mode }}
+    mode: {{ .Values.peerAuthentication.mtls.mode }}
 {{- end }}
