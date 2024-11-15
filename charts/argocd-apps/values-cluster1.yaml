@@ -66,27 +66,27 @@ argocd-apps:
       syncOptions:
       - CreateNamespace=true
 
-  # - name: account-service
-  #   annotations:
-  #     argocd.argoproj.io/sync-wave: "3"    
-  #   namespace: argocd
-  #   destination:
-  #     namespace: account
-  #     server: https://kubernetes.default.svc
-  #   project: argocd
-  #   source:                 
-  #     path: charts/apps/account
-  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-  #     targetRevision: HEAD 
-  #     helm:
-  #       version: v3
-  #       valueFiles:
-  #       - values-base.yaml
-  #       - values-cluster1.yaml 
-  #   syncPolicy:
-  #     automated:
-  #       selfHeal: true
-  #       prune: true 
+  - name: account-service
+    annotations:
+      argocd.argoproj.io/sync-wave: "3"    
+    namespace: argocd
+    destination:
+      namespace: account
+      server: https://kubernetes.default.svc
+    project: argocd
+    source:                 
+      path: charts/apps/account
+      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+      targetRevision: HEAD 
+      helm:
+        version: v3
+        valueFiles:
+        - values-base.yaml
+        - values-cluster1.yaml 
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true 
 
   - name: transfer-service
     annotations:
