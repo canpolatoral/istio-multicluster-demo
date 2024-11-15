@@ -11,8 +11,11 @@ base-ms-chart:
     pullPolicy: IfNotPresent
     tag: "1.0.1"
 
-  mtls:
-    mode: STRICT
+  peerAuthentication:
+    enabled: true
+    
+    mtls:
+      mode: STRICT
 
   authorizationPolicy:
     enabled: true
