@@ -9,8 +9,8 @@ createClusters() {
   kind create cluster --name cluster1
   kind create cluster --name cluster2
 
-  kubectl --context $CTX_CLUSTER1 label node cluster1-control-plane topology.kubernetes.io/zone=myd
-  kubectl --context $CTX_CLUSTER2 label node cluster2-control-plane topology.kubernetes.io/zone=auh
+  kubectl --context $CTX_CLUSTER1 label node cluster1-control-plane topology.kubernetes.io/zone=zone1
+  kubectl --context $CTX_CLUSTER2 label node cluster2-control-plane topology.kubernetes.io/zone=zone2
 }
 
 setupInitialNamespaces() {

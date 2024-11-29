@@ -22,7 +22,7 @@ base-ms-chart:
           enabled: true
           failover:
             - from: auh
-              to: myd
+              to: zone1
 
       outlierDetection:
         consecutive5xxErrors: 1

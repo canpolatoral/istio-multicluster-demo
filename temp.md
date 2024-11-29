@@ -168,8 +168,35 @@ kubectl --context="$CTX_CLUSTER1" apply -f test/nginx-namespace.yaml
 kubectl --context="$CTX_CLUSTER1" apply -f test/nginx-deployment.yaml
 kubectl --context="$CTX_CLUSTER1" apply -f test/nginx-virtualservice.yaml
 
-istioctl --context $CTX_CLUSTER1 proxy-config endpoint transfer-service-575845f844-br7f7.transfer | grep account
+istioctl --context $CTX_CLUSTER1 proxy-config endpoint transfer-service-7987698867-t7k45.transfer | grep account
 
 istioctl --context $CTX_CLUSTER1 proxy-config all transfer-service-575845f844-br7f7.transfer
 
+istioctl --context $CTX_CLUSTER1 proxy-config endpoints transfer-service-6cf4f5b759-m4czj.transfer --cluster "outbound|80||account-service.account.svc.cluster.local"
 
+kubectl --context $CTX_CLUSTER1 logs transfer-service-6cf4f5b759-m4czj -c istio-proxy -n transfer | grep "outlier"
+
+kubectl --context $CTX_CLUSTER1 logs account-service-87fcb78d4-wfwlk -c istio-proxy -n account | grep "outlier"
+
+kubectl --context $CTX_CLUSTER1 exec transfer-service-6cf4f5b759-m4czj -c istio-proxy -n transfer -- curl http://localhost:15000/stats | grep outlier
+
+
+
+----------
+
+# deploy kubevirt 
+
+# Use kubectl to deploy the KubeVirt operator:
+
+export VERSION=$(curl -s https://storage.googleapis.com/kubevirt-prow/release/kubevirt/kubevirt/stable.txt)
+
+echo $VERSION
+kubectl create -f "https://github.com/kubevirt/kubevirt/releases/download/${VERSION}/kubevirt-operator.yaml"
+
+# Again use kubectl to deploy the KubeVirt custom resource definitions:
+
+kubectl create -f "https://github.com/kubevirt/kubevirt/releases/download/${VERSION}/kubevirt-cr.yaml"
+
+# Check the deployment:
+
+kubectl get kubevirt.kubevirt.io/kubevirt -n kubevirt -o=jsonpath="{.status.phase}"
