@@ -22,114 +22,114 @@ argocd-apps:
         selfHeal: true
         prune: true 
 
-  - name: gateways
-    annotations:
-      argocd.argoproj.io/sync-wave: "1"    
-    namespace: argocd
-    destination:
-      namespace: istio-system
-      server: https://kubernetes.default.svc
-    project: argocd
-    source:                 
-      path: charts/apps/gateways
-      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-      targetRevision: HEAD 
-      helm:
-        version: v3
-        valueFiles:
-        - values-cluster1.yaml 
-    syncPolicy:
-      automated:
-        selfHeal: true
-        prune: true 
-
-  # - name: kiali
+  # - name: gateways
   #   annotations:
-  #     argocd.argoproj.io/sync-wave: "2"    
+  #     argocd.argoproj.io/sync-wave: "1"    
   #   namespace: argocd
   #   destination:
-  #     namespace: kiali-operator
+  #     namespace: istio-system
   #     server: https://kubernetes.default.svc
   #   project: argocd
   #   source:                 
-  #     path: charts/kiali-operator
+  #     path: charts/apps/gateways
   #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
   #     targetRevision: HEAD 
   #     helm:
   #       version: v3
   #       valueFiles:
-  #       - values.yaml 
+  #       - values-cluster1.yaml 
   #   syncPolicy:
   #     automated:
   #       selfHeal: true
   #       prune: true 
-  #     syncOptions:
-  #     - CreateNamespace=true
 
-  - name: account-service
-    annotations:
-      argocd.argoproj.io/sync-wave: "3"    
-    namespace: argocd
-    destination:
-      namespace: account
-      server: https://kubernetes.default.svc
-    project: argocd
-    source:                 
-      path: charts/apps/account
-      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-      targetRevision: HEAD 
-      helm:
-        version: v3
-        valueFiles:
-        - values-base.yaml
-        - values-cluster1.yaml 
-    syncPolicy:
-      automated:
-        selfHeal: true
-        prune: true 
+  # # - name: kiali
+  # #   annotations:
+  # #     argocd.argoproj.io/sync-wave: "2"    
+  # #   namespace: argocd
+  # #   destination:
+  # #     namespace: kiali-operator
+  # #     server: https://kubernetes.default.svc
+  # #   project: argocd
+  # #   source:                 
+  # #     path: charts/kiali-operator
+  # #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+  # #     targetRevision: HEAD 
+  # #     helm:
+  # #       version: v3
+  # #       valueFiles:
+  # #       - values.yaml 
+  # #   syncPolicy:
+  # #     automated:
+  # #       selfHeal: true
+  # #       prune: true 
+  # #     syncOptions:
+  # #     - CreateNamespace=true
 
-  - name: transfer-service
-    annotations:
-      argocd.argoproj.io/sync-wave: "4"    
-    namespace: argocd
-    destination:
-      namespace: transfer
-      server: https://kubernetes.default.svc
-    project: argocd
-    source:                 
-      path: charts/apps/transfer
-      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-      targetRevision: HEAD 
-      helm:
-        version: v3
-        valueFiles:
-        - values-base.yaml 
-    syncPolicy:
-      automated:
-        selfHeal: true
-        prune: true 
+  # - name: account-service
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "3"    
+  #   namespace: argocd
+  #   destination:
+  #     namespace: account
+  #     server: https://kubernetes.default.svc
+  #   project: argocd
+  #   source:                 
+  #     path: charts/apps/account
+  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+  #     targetRevision: HEAD 
+  #     helm:
+  #       version: v3
+  #       valueFiles:
+  #       - values-base.yaml
+  #       - values-cluster1.yaml 
+  #   syncPolicy:
+  #     automated:
+  #       selfHeal: true
+  #       prune: true 
 
-  - name: customer-service
-    annotations:
-      argocd.argoproj.io/sync-wave: "5"    
-    namespace: argocd
-    destination:
-      namespace: customer
-      server: https://kubernetes.default.svc
-    project: argocd
-    source:                 
-      path: charts/apps/customer
-      repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
-      targetRevision: HEAD 
-      helm:
-        version: v3
-        valueFiles:
-        - values-base.yaml
-        - values-cluster1.yaml 
-    syncPolicy:
-      automated:
-        selfHeal: true
-        prune: true 
+  # - name: transfer-service
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "4"    
+  #   namespace: argocd
+  #   destination:
+  #     namespace: transfer
+  #     server: https://kubernetes.default.svc
+  #   project: argocd
+  #   source:                 
+  #     path: charts/apps/transfer
+  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+  #     targetRevision: HEAD 
+  #     helm:
+  #       version: v3
+  #       valueFiles:
+  #       - values-base.yaml 
+  #   syncPolicy:
+  #     automated:
+  #       selfHeal: true
+  #       prune: true 
+
+  # - name: customer-service
+  #   annotations:
+  #     argocd.argoproj.io/sync-wave: "5"    
+  #   namespace: argocd
+  #   destination:
+  #     namespace: customer
+  #     server: https://kubernetes.default.svc
+  #   project: argocd
+  #   source:                 
+  #     path: charts/apps/customer
+  #     repoURL: https://github.com/canpolatoral/istio-multicluster-demo.git
+  #     targetRevision: HEAD 
+  #     helm:
+  #       version: v3
+  #       valueFiles:
+  #       - values-base.yaml
+  #       - values-cluster1.yaml 
+  #   syncPolicy:
+  #     automated:
+  #       selfHeal: true
+  #       prune: true 
 
   - name: keycloak
     annotations:
