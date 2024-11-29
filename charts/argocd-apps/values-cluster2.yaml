@@ -152,6 +152,8 @@ argocd-apps:
       automated:
         selfHeal: true
         prune: true 
+      syncOptions:
+      - CreateNamespace=true
 
   - name: argocd-apps
     annotations:
