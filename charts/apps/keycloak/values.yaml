@@ -1325,7 +1325,7 @@ keycloak:
     auth:
       postgresPassword: ""
       username: bn_keycloak
-      password: ""
+      password: "password"
       database: bitnami_keycloak
       existingSecret: ""
       secretKeys:
