@@ -47,6 +47,9 @@ extraVolumes:
   - name: realm-config
     configMap:
       name: keycloak-realm
+      items:
+        - key: "test-realm.json"
+          path: "test-realm.json"
 
 extraVolumeMounts:
   - name: realm-config
