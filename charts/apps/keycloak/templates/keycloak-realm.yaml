@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: realm-cm
+  name: keycloak-realm
 data:
-  test.json: |-
+  test-realm.json: |-
     {
       "id": "711df4c0-fe3e-4a3e-9072-39677cf5bb03",
       "realm": "test",
