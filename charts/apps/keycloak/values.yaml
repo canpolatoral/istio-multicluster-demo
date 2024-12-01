@@ -24,17 +24,31 @@ keycloak:
         userPasswordKey: password
     architecture: standalone
 
-  extraEnvVars:
-    - name: KEYCLOAK_EXTRA_ARGS
-      value: "-Dkeycloak.import=/config/test-realm.json"      
-  extraVolumeMounts:
-    - name: config
-      mountPath: "/config"
-      readOnly: true
-  extraVolumes:
-    - name: config
-      configMap:
-        name: keycloak-realm
-        items:
-        - key: "test-realm.json"
-          path: "test-realm.json"
+  # extraEnvVars:
+  #   - name: KEYCLOAK_EXTRA_ARGS
+  #     value: "-Dkeycloak.import=/config/test-realm.json"      
+  # extraVolumeMounts:
+  #   - name: config
+  #     mountPath: "/config"
+  #     readOnly: true
+  # extraVolumes:
+  #   - name: config
+  #     configMap:
+  #       name: keycloak-realm
+  #       items:
+  #       - key: "test-realm.json"
+  #         path: "test-realm.json"
+
+extraEnvVars:
+  - name: KEYCLOAK_EXTRA_ARGS # override values from the conf file
+    value: --import-realm
+
+extraVolumes:
+  - name: realm-config
+    configMap:
+      name: keycloak-realm
+
+extraVolumeMounts:
+  - name: realm-config
+    mountPath: "/opt/bitnami/keycloak/data/import"
+    readOnly: true
