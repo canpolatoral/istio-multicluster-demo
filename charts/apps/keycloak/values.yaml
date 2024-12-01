@@ -244,7 +244,7 @@ keycloak:
   ## @param existingConfigmap Name of existing ConfigMap with Keycloak configuration
   ## NOTE: When it's set the configuration parameter is ignored
   ##
-  existingConfigmap: "realm-cm"
+  existingConfigmap: ""
   ## @param extraStartupArgs Extra default startup args
   ##
   extraStartupArgs: ""
