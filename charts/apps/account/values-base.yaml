@@ -20,7 +20,7 @@ base-ms-chart:
   authorizationPolicy:
     enabled: true
 
-    allowedSources:
+    allowedServiceAccounts:
       - namespace: transfer
         serviceAccount: transfer-service
       - namespace: istio-system

@@ -9,10 +9,29 @@ spec:
       app.kubernetes.io/name: {{ include "ms.name" . }}
   action: ALLOW
   rules:
-{{- range .Values.authorizationPolicy.allowedSources }}
+{{- range .Values.authorizationPolicy.allowedServiceAccounts }}
   - from:
     - source:
-        # namespaces: ["{{ .namespace }}"]
         principals: ["cluster.local/ns/{{ .namespace }}/sa/{{ .serviceAccount }}"]
+    to:
+    - operation:
+{{- if .methods }}
+        methods: {{ .methods | toYaml | nindent 8 }}
+{{- end }}
+{{- if .paths }}
+        paths: {{ .paths | toYaml | nindent 8 }}
+{{- end }}
+{{- end }}
+{{- range .Values.authorizationPolicy.allowedClients }}
+  - from:
+    - source:
+        principals: ["{{ .issuer }}/{{ .clientId }}"]
+    to:
+{{- if .methods }}
+        methods: {{ .methods | toYaml | nindent 8 }}
+{{- end }}
+{{- if .paths }}
+        paths: {{ .paths | toYaml | nindent 8 }}
+{{- end }}
 {{- end }}
 {{- end }}
