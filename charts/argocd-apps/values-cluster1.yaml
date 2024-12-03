@@ -104,6 +104,7 @@ argocd-apps:
         version: v3
         valueFiles:
         - values-base.yaml 
+        - values-cluster1.yaml 
     syncPolicy:
       automated:
         selfHeal: true
