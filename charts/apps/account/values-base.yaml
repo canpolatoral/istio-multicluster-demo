@@ -9,7 +9,7 @@ base-ms-chart:
   image:
     repository: canpolatoral/receiver-service
     pullPolicy: IfNotPresent
-    tag: "1.0.6"
+    tag: "1.0.7"
 
   peerAuthentication:
     enabled: true
