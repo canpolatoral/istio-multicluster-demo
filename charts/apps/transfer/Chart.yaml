@@ -25,5 +25,5 @@ appVersion: "1.16.0"
 
 dependencies:
   - name: base-ms-chart
-    version: 0.1.7
+    version: 0.1.8
     repository: https://canpolatoral.github.io/istio-multicluster-demo
