@@ -11,7 +11,7 @@ base-ms-chart:
       value: "Transfer Service"
 
   destinationRule:
-    enabled: true
+    enabled: false
 
     trafficPolicy:
       connectionPool:
