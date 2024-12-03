@@ -13,14 +13,15 @@ spec:
   - from:
     - source:
         principals: ["cluster.local/ns/{{ .namespace }}/sa/{{ .serviceAccount }}"]
+{{- if or .methods .paths }}
     to:
-    - operation:
-{{- if .methods }}
+    {{- if .methods }}
         methods: {{ .methods | toYaml | nindent 8 }}
-{{- end }}
-{{- if .paths }}
+    {{- end }}
+    {{- if .paths }}
         paths: {{ .paths | toYaml | nindent 8 }}
-{{- end }}
+    {{- end }}
+    {{- end }}
 {{- end }}
 {{- range .Values.authorizationPolicy.allowedClients }}
   - from:
