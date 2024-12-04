@@ -21,7 +21,7 @@ base-ms-chart:
     enabled: true
 
     jwtRules:
-      - issuer: test-issuer
+      - issuer: http://keycloak.keycloak.svc/realms/test
         jwksUri: http://keycloak.keycloak.svc/realms/test/protocol/openid-connect/certs
 
   authorizationPolicy:
@@ -36,7 +36,7 @@ base-ms-chart:
       #   serviceAccount: customer-service\
 
     allowedClients:
-      - issuer: test-issuer
+      - issuer: http://keycloak.keycloak.svc/realms/test
         clientId: test-client-id
 
   # resources:
