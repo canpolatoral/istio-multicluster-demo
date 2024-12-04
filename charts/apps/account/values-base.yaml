@@ -35,9 +35,9 @@ base-ms-chart:
       # - namespace: customer
       #   serviceAccount: customer-service\
 
-    # allowedClients:
-    #   - namespace: test-issuer
-    #     serviceAccount: test-client-id
+    allowedClients:
+      - issuer: test-issuer
+        clientId: test-client-id
 
   # resources:
   #   requests:
