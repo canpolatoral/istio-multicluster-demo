@@ -22,7 +22,7 @@ base-ms-chart:
 
     jwtRules:
       - issuer: test-issuer
-        jwksUri: http://keycloak.svc.keycloak/realms/test/protocol/openid-connect/certs
+        jwksUri: http://keycloak.keycloak.svc/realms/test/protocol/openid-connect/certs
 
   authorizationPolicy:
     enabled: true
