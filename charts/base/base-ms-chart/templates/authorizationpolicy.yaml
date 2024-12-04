@@ -27,12 +27,14 @@ spec:
   - from:
     - source:
         principals: ["{{ .issuer }}/{{ .clientId }}"]
+{{- if or .methods .paths }}
     to:
-{{- if .methods }}
+    {{- if .methods }}
         methods: {{ .methods | toYaml | nindent 8 }}
-{{- end }}
-{{- if .paths }}
+    {{- end }}
+    {{- if .paths }}
         paths: {{ .paths | toYaml | nindent 8 }}
-{{- end }}
+    {{- end }}
+    {{- end }}
 {{- end }}
 {{- end }}
