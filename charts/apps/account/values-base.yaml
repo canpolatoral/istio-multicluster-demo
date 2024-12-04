@@ -17,6 +17,13 @@ base-ms-chart:
     mtls:
       mode: STRICT
 
+  requestAuthentication:
+    enabled: true
+
+    jwtRules:
+      - issuer: test-issuer
+        jwksUri: http://keycloak.svc.keycloak/realms/test/protocol/openid-connect/certs
+
   authorizationPolicy:
     enabled: true
 
@@ -26,7 +33,11 @@ base-ms-chart:
       - namespace: istio-system
         serviceAccount: istio-ingressgateway
       # - namespace: customer
-      #   serviceAccount: customer-service
+      #   serviceAccount: customer-service\
+
+    # allowedClients:
+    #   - namespace: test-issuer
+    #     serviceAccount: test-client-id
 
   # resources:
   #   requests:
