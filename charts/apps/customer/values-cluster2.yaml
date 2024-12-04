@@ -9,6 +9,14 @@ base-ms-chart:
       value: "ABU DHABI"
     - name: SERVICE_NAME
       value: "Customer Service"
+    - name: CLIENT_CREDENTIALS_AUTH_ENABLED
+      value: "true"
+    - name: JWT_AUTH_URL
+      value: "http://keycloak.keycloak.svc/realms/test/protocol/openid-connect/token"
+    - name: CLIENT_ID
+      value: "test-client-id"
+    - name: CLIENT_SECRET
+      value:  "test-secret"
 
   destinationRule:
     enabled: false
