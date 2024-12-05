@@ -26,7 +26,7 @@ spec:
 {{- range .Values.authorizationPolicy.allowedClients }}
   - from:
     - source:
-        principals: ["{{ .issuer }}/{{ .clientId }}"]
+        requestPrincipals: ["{{ .issuer }}/{{ .clientId }}"]
 {{- if or .methods .paths }}
     to:
     {{- if .methods }}
