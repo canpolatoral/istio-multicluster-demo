@@ -37,11 +37,11 @@ base-ms-chart:
   authorizationPolicy:
     enabled: true
 
-    allowedServiceAccounts:
-      - namespace: transfer
-        serviceAccount: transfer-service
-      - namespace: istio-system
-        serviceAccount: istio-ingressgateway
+    # allowedServiceAccounts:
+    #   - namespace: transfer
+    #     serviceAccount: transfer-service
+    #   - namespace: istio-system
+    #     serviceAccount: istio-ingressgateway
       # - namespace: customer
       #   serviceAccount: customer-service\
 
