@@ -72,6 +72,12 @@ authorizationPolicy:
   #   - namespace: customer
   #     serviceAccount: payments-service-account
 
+  # allowedClients:
+  #   - issuer: test-issuer
+  #     clientId: test-client-id-1
+  #   - issuer: test-issuer
+  #     clientId: test-client-id-2
+
 replicaCount: 1
 
 image:
