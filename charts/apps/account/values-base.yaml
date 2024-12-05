@@ -47,8 +47,8 @@ base-ms-chart:
 
     allowedClients:
       - issuer: http://keycloak.keycloak.svc/realms/test
-        #clientId: 291e5a43-c687-49a0-b110-69381249c16f
-        clientId: test-client-id
+        #clientId: test-client-id
+        clientId: 291e5a43-c687-49a0-b110-69381249c16f
 
   # resources:
   #   requests:
