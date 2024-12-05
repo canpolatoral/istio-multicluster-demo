@@ -45,10 +45,10 @@ base-ms-chart:
       # - namespace: customer
       #   serviceAccount: customer-service\
 
-    # allowedClients:
-    #   - issuer: http://keycloak.keycloak.svc/realms/test
-    #     clientId: 291e5a43-c687-49a0-b110-69381249c16f
-        #clientId: test-client-id
+    allowedClients:
+      - issuer: http://keycloak.keycloak.svc/realms/test
+        #clientId: 291e5a43-c687-49a0-b110-69381249c16f
+        clientId: test-client-id
 
   # resources:
   #   requests:
