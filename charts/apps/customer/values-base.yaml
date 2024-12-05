@@ -10,7 +10,7 @@ base-ms-chart:
     repository: canpolatoral/caller-service
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.0.10"
+    tag: "1.0.11"
 
   peerAuthentication:
     enabled: true
