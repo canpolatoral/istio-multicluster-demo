@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   base-ms-chart:
   - apiVersion: v2
+    appVersion: 0.1.10
+    created: "2024-12-05T18:33:18.107658536Z"
+    description: A Helm chart for Kubernetes
+    digest: 31da94fe06e49080cc43e9f72284611d42b17ed9ec6a57d77523078dd26ac57a
+    name: base-ms-chart
+    type: application
+    urls:
+    - https://github.com/canpolatoral/istio-multicluster-demo/releases/download/base-ms-chart-0.1.10/base-ms-chart-0.1.10.tgz
+    version: 0.1.10
+  - apiVersion: v2
     appVersion: 0.1.9
     created: "2024-12-04T14:52:17.578244691Z"
     description: A Helm chart for Kubernetes
@@ -91,4 +101,4 @@ entries:
     urls:
     - https://github.com/canpolatoral/istio-multicluster-demo/releases/download/base-ms-chart-0.1.0/base-ms-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2024-12-04T14:52:17.57830848Z"
+generated: "2024-12-05T18:33:18.107733337Z"
