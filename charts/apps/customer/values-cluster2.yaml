@@ -19,7 +19,7 @@ base-ms-chart:
       value:  "test-secret"
 
   destinationRule:
-    enabled: false
+    enabled: true
 
     trafficPolicy:
       connectionPool:
