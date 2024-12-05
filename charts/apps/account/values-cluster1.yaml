@@ -15,7 +15,7 @@ base-ms-chart:
     #   value: "Test error generated for LocalityLB"
 
   destinationRule:
-    enabled: false
+    enabled: true
 
     trafficPolicy:
       connectionPool:
