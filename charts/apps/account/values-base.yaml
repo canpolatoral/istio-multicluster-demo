@@ -9,7 +9,7 @@ base-ms-chart:
   image:
     repository: canpolatoral/receiver-service
     pullPolicy: IfNotPresent
-    tag: "1.0.12"
+    tag: "1.0.13"
 
   readinessProbe:
     httpGet:
