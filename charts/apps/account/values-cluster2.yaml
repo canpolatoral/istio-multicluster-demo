@@ -21,7 +21,7 @@ base-ms-chart:
         localityLbSetting:
           enabled: true
           failover:
-            - from: auh
+            - from: zone2
               to: zone1
 
       outlierDetection:
