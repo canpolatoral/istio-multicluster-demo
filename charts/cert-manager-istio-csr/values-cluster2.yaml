@@ -2,4 +2,4 @@ cert-manager-istio-csr:
   app:
     server:
       # The istio cluster ID to verify incoming CSRs.
-      clusterID: "istio-cluster2"
+      clusterID: "cluster2"
