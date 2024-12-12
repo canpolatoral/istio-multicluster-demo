@@ -1,6 +1,6 @@
 ./cluster-delete-all.sh
-./cluster-create.sh
-./vault-configure.sh
-./cert-manager-setup.sh
-./istio-setup.sh
-./argocd-setup.sh
+./cluster-create.sh $1
+./vault-configure.sh $1
+./cert-manager-setup.sh $1
+./istio-setup.sh $1
+./argocd-setup.sh $1

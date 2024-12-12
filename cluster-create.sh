@@ -3,29 +3,30 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-source ./env.sh
+source ./env.sh $1
 
 createClusters() {
-  kind create cluster --name cluster1
-  kind create cluster --name cluster2
+    for cluster in ${CLUSTERS[@]}; do
+        kind create cluster --name ${cluster}
+    done
 
-  kubectl --context $CTX_CLUSTER1 label node cluster1-control-plane topology.kubernetes.io/zone=zone1
-  kubectl --context $CTX_CLUSTER2 label node cluster2-control-plane topology.kubernetes.io/zone=zone2
+    for cluster in ${CLUSTERS[@]}; do
+        kubectl --context kind-${cluster} label node ${cluster}-control-plane topology.kubernetes.io/zone=zone${cluster: -1}
+    done
 }
 
 setupInitialNamespaces() {
-    
     local context=${1}
-    kubectl create namespace istio-system --context="${context}"
-    # kubectl create namespace cert-manager --context="${context}"
+    kubectl create namespace istio-system --context=kind-${context}
 }
 
 main() {
 
-  createClusters
+    createClusters
 
-  setupInitialNamespaces ${CTX_CLUSTER1}
-  setupInitialNamespaces ${CTX_CLUSTER2}
+    for cluster in ${CLUSTERS[@]}; do
+        setupInitialNamespaces ${cluster}
+    done
 }
 
 main

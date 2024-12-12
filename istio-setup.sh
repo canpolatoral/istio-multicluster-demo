@@ -3,120 +3,108 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-source ./env.sh
+source ./env.sh $1
 
 setupIstioCSR() {
-  
-    local context=${1}
-    values_cluster="${context/kind/values}"
+    local cluster=${1}
 
     helm upgrade cert-manager-istio-csr ./charts/cert-manager-istio-csr \
         --install \
         --namespace cert-manager \
         --wait \
-        --values=./charts/cert-manager-istio-csr/"${values_cluster}".yaml \
-        --kube-context=${context}
+        --values=./charts/cert-manager-istio-csr/values-"${cluster}".yaml \
+        --kube-context=kind-${cluster}
 }
 
 setupIstioBase() {
-
-    local context=${1}
-
-    values_cluster="${context/kind/values}"
+    local cluster=${1}
 
     helm upgrade istio-base ./charts/istio/base \
         --install \
         --wait \
-        --kube-context=${context} \
+        --kube-context=kind-${cluster} \
         --namespace istio-system \
-        --values=./charts/istio/base/"${values_cluster}".yaml 
-
+        --values=./charts/istio/base/values-"${cluster}".yaml 
 }
 
 setupIstiod() {
-
-    local context=${1}
-
-    values_cluster="${context/kind/values}"
+    local cluster=${1}
 
     helm upgrade istiod ./charts/istio/istiod \
         --install \
         --wait \
-        --values=./charts/istio/istiod/"${values_cluster}".yaml \
+        --values=./charts/istio/istiod/values-"${cluster}".yaml \
         --namespace istio-system \
-        --kube-context=${context} 
+        --kube-context=kind-${cluster} 
 }
 
 setupRemoteSecret() {
-
     local cluster1context=${1}
     local cluster2context=${2}
 
-    local apiServerIP=$(kubectl --context=${cluster1context} get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].status.podIP}')
+    local apiServerIP=$(kubectl --context=kind-${cluster1context} get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].status.podIP}')
 
     local istioClusterName="${cluster1context/kind/istio}"
 
     istioctl create-remote-secret \
-        --context=${cluster1context} \
+        --context=kind-${cluster1context} \
         --server=https://${apiServerIP}:6443 \
         --name=${istioClusterName} | \
-        kubectl apply -f - --context=${cluster2context}
+        kubectl apply -f - --context=kind-${cluster2context}
 }
 
 setupIngressGateway() {
-    local context=${1}
-
-    values_cluster="${context/kind/values}"
+    local cluster=${1}
 
     helm upgrade istio-ingressgateway ./charts/istio/ingress-gateway \
         --install \
         --wait \
-        --values=./charts/istio/ingress-gateway/"${values_cluster}".yaml \
+        --values=./charts/istio/ingress-gateway/values-"${cluster}".yaml \
         --namespace istio-system \
-        --kube-context=${context} 
+        --kube-context=kind-${cluster} 
 }
 
 setupEastWestGateway() {
-    local context=${1}
-
-    values_cluster="${context/kind/values}"
+    local cluster=${1}
 
     helm upgrade istio-eastwestgateway ./charts/istio/eastwest-gateway \
         --install \
         --wait \
-        --values=./charts/istio/eastwest-gateway/"${values_cluster}".yaml \
+        --values=./charts/istio/eastwest-gateway/values-"${cluster}".yaml \
         --namespace istio-system \
-        --kube-context=${context} 
+        --kube-context=kind-${cluster} 
 }
 
 setupPrometheus() {
-    local context=${1}
-
-    kubectl --context=${context} apply -f https://raw.githubusercontent.com/istio/istio/release-1.24/samples/addons/prometheus.yaml
+    local cluster=${1}
+    kubectl --context=kind-${cluster} apply -f https://raw.githubusercontent.com/istio/istio/release-1.24/samples/addons/prometheus.yaml
 }
 
 main() {
- 
-    setupIstioCSR ${CTX_CLUSTER1}
-    setupIstioCSR ${CTX_CLUSTER2}
-    
-    setupIstioBase ${CTX_CLUSTER1}
-    setupIstioBase ${CTX_CLUSTER2}
 
-    setupIstiod ${CTX_CLUSTER1}
-    setupIstiod ${CTX_CLUSTER2}
+    for cluster in ${CLUSTERS[@]}; do
+        setupIstioCSR ${cluster}
+        setupIstioBase ${cluster}
+        setupIstiod ${cluster}
+        setupIngressGateway ${cluster}
 
-    setupRemoteSecret ${CTX_CLUSTER1} ${CTX_CLUSTER2}
-    setupRemoteSecret ${CTX_CLUSTER2} ${CTX_CLUSTER1}
+        # if cluster count is 1 then skip creating east west gateway
+        if [ ${#CLUSTERS[@]} -gt 1 ]; then
+            setupEastWestGateway ${cluster}
+        fi
+        # setupPrometheus ${cluster}
+    done
 
-    setupIngressGateway ${CTX_CLUSTER1}
-    setupIngressGateway ${CTX_CLUSTER2}
-
-    setupEastWestGateway ${CTX_CLUSTER1}
-    setupEastWestGateway ${CTX_CLUSTER2}
-
-    setupPrometheus ${CTX_CLUSTER1}
-    setupPrometheus ${CTX_CLUSTER2}
+    # if cluster count is 1 then skip creating remote secrets
+    if [ ${#CLUSTERS[@]} -gt 1 ]; then
+        for i in ${!CLUSTERS[@]}; do
+            for j in ${!CLUSTERS[@]}; do
+                if [ $i -ne $j ]; then
+                    setupRemoteSecret ${CLUSTERS[$i]} ${CLUSTERS[$j]}
+                fi
+            done
+        done
+    fi
 }
 
 main

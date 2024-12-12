@@ -3,31 +3,29 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-source ./env.sh
+source ./env.sh $1
 
 setupArgoCD() {
   
-    local context=${1}
+    local cluster=${1}
 
-    kubectl create namespace argocd --context=${context}
+    kubectl create namespace argocd --context=kind-${cluster}
 
     helm upgrade --install argocd ./charts/argocd \
       --wait \
-      --kube-context="${context}" \
+      --kube-context=kind-${cluster} \
       --namespace=argocd
 }
 
 installArgoCDApps() {
   
-    local context=${1}
-
-    values_cluster="${context/kind/values}"
+    local cluster=${1}
 
     helm upgrade --install argocd-apps ./charts/argocd-apps \
     --wait \
-    --kube-context="${context}" \
+    --kube-context=kind-${cluster} \
     --values=./charts/argocd-apps/values-base.yaml \
-    --values=./charts/argocd-apps/"${values_cluster}".yaml \
+    --values=./charts/argocd-apps/values-"${cluster}".yaml \
     --namespace=argocd
 }
 
@@ -49,14 +47,10 @@ installArgoCDApps() {
 
 main() {
 
-    # setupRemoteSecret ${CTX_CLUSTER1} ${CTX_CLUSTER2}
-    # setupRemoteSecret ${CTX_CLUSTER2} ${CTX_CLUSTER1}
-
-    setupArgoCD ${CTX_CLUSTER1}
-    setupArgoCD ${CTX_CLUSTER2}
-
-    installArgoCDApps ${CTX_CLUSTER1}
-    installArgoCDApps ${CTX_CLUSTER2}
+    for cluster in ${CLUSTERS[@]}; do
+        setupArgoCD ${cluster}
+        installArgoCDApps ${cluster}
+    done
 }
 
 main
