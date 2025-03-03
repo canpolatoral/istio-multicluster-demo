@@ -14,7 +14,7 @@ spec:
     jwksUri: "{{ .jwksUri }}"
 {{- end }}
 {{- if .jwks }}
-    jwks: "{{ .jwks }}"
+    jwks: {{ .jwks }}
 {{- end }}
 {{- end }}
 {{- end }}
