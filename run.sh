@@ -4,3 +4,4 @@
 ./cert-manager-setup.sh $1
 ./istio-setup.sh $1
 ./argocd-setup.sh $1
+./update-hosts.sh $1

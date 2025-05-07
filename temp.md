@@ -1,3 +1,11 @@
+# Start vault
+vault server -dev -dev-root-token-id=test-token -log-level=trace 
+
+# For external ip
+sudo cloud-provider-kind
+
+# setup 
+
 export CTX_CLUSTER1=kind-cluster1
 export CTX_CLUSTER2=kind-cluster2
 
