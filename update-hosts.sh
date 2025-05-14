@@ -1,3 +1,4 @@
+
 set -o xtrace
 set -o errexit
 set -o nounset
@@ -28,4 +29,23 @@ for cluster in "${CLUSTERS[@]}"; do
     echo "${ip} ${host}" | sudo tee -a /etc/hosts >/dev/null
   fi
   echo "✔  ${ip} → ${host}"
+
+  # 3. Wait until Argo CD server gets an External-IP
+  kubectl --context "$ctx" -n argocd \
+          wait --for=jsonpath='{.status.loadBalancer.ingress[0].ip}' \
+          svc/argocd-server --timeout=180s
+
+  argo_ip=$(kubectl --context "$ctx" -n argocd \
+                   get svc/argocd-server \
+                   -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+  argo_host="argo-${cluster}.${BASE_DOMAIN}"
+
+  # 4. Add or replace the line in /etc/hosts (needs root)
+  if grep -qE "[[:space:]]${argo_host}$" /etc/hosts; then
+    sudo sed -i.bak "s/^.*[[:space:]]${argo_host}$/${argo_ip} ${argo_host}/" /etc/hosts
+  else
+    echo "${argo_ip} ${argo_host}" | sudo tee -a /etc/hosts >/dev/null
+  fi
+  echo "✔  ${argo_ip} → ${argo_host}"
 done
