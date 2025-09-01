@@ -46,8 +46,8 @@ base-ms-chart:
     allowedServiceAccounts:
       - namespace: transfer
         serviceAccount: transfer-service
-      - namespace: istio-system
-        serviceAccount: istio-ingressgateway
+      # - namespace: istio-system
+      #   serviceAccount: istio-ingressgateway
       # - namespace: customer
       #   serviceAccount: customer-service\
 
