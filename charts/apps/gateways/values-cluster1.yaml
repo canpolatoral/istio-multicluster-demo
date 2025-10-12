@@ -23,4 +23,4 @@ gateways:
           name: http
           protocol: HTTP
         hosts:
-          - "cluster1.multicluster.com"
+          - "*" # "cluster1.multicluster.com"
