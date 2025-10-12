@@ -1,12 +1,13 @@
 keycloak: 
 
   # Fixes for Bitnami breaking images
+  image:
+    repository: bitnamilegacy/keycloak
+
   redis:
+    # Fixes for Bitnami breaking images
     image:
       repository: bitnamilegacy/redis
-  keycloak:
-    image:
-      repository: bitnamilegacy/keycloak
 
   auth:
     ## @param auth.adminUser Keycloak administrator user
