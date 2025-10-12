@@ -1,4 +1,13 @@
 keycloak: 
+
+  # Fixes for Bitnami breaking images
+  redis:
+    image:
+      repository: bitnamilegacy/redis
+  keycloak:
+    image:
+      repository: bitnamilegacy/keycloak
+
   auth:
     ## @param auth.adminUser Keycloak administrator user
     ##
@@ -23,6 +32,10 @@ keycloak:
       secretKeys:
         userPasswordKey: password
     architecture: standalone
+
+    # Fixes for Bitnami breaking images
+    image:
+      repository: bitnamilegacy/postgresql
 
   # extraEnvVars:
   #   - name: KEYCLOAK_EXTRA_ARGS
