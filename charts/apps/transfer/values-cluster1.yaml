@@ -35,7 +35,8 @@ base-ms-chart:
     enabled: true
 
     hosts:
-      - "*" 
+      - "istio-ingressgateway.istio-system.svc.cluster.local" 
+      - "cluster1.multicluster.com" 
     gateways:
       - "istio-system/ingress-gateway"
     http:
