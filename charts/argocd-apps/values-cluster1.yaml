@@ -27,7 +27,7 @@ argocd-apps:
       argocd.argoproj.io/sync-wave: "1"    
     namespace: argocd
     destination:
-      namespace: istio-system
+      namespace: istio-ingress
       server: https://kubernetes.default.svc
     project: argocd
     source:                 
