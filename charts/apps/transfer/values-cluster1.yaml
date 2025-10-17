@@ -38,7 +38,7 @@ base-ms-chart:
       - "cluster1.multicluster.com" 
       - "cluster2.multicluster.com" 
     gateways:
-      - "istio-system/ingress-gateway"
+      - "istio-ingress/ingress-gateway"
     http:
       match:
         prefix: "/transfer"

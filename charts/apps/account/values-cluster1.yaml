@@ -41,7 +41,7 @@ base-ms-chart:
     hosts:
       - "cluster1.multicluster.com"
     gateways:
-      - "istio-system/ingress-gateway"
+      - "istio-ingress/ingress-gateway"
     http:
       match:
         prefix: "/account"
