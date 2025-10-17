@@ -56,22 +56,26 @@ setupRemoteSecret() {
 setupIngressGateway() {
     local cluster=${1}
 
+    # namespace is changed from istio-system to istio-ingress
+
     helm upgrade istio-ingressgateway ./charts/istio/ingress-gateway \
         --install \
         --wait \
         --values=./charts/istio/ingress-gateway/values-"${cluster}".yaml \
-        --namespace istio-system \
+        --namespace istio-ingress \
         --kube-context=kind-${cluster} 
 }
 
 setupEastWestGateway() {
     local cluster=${1}
 
+    # namespace is changed from istio-system to istio-ingress
+
     helm upgrade istio-eastwestgateway ./charts/istio/eastwest-gateway \
         --install \
         --wait \
         --values=./charts/istio/eastwest-gateway/values-"${cluster}".yaml \
-        --namespace istio-system \
+        --namespace istio-ingress \
         --kube-context=kind-${cluster} 
 }
 

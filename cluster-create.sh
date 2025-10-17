@@ -18,6 +18,7 @@ createClusters() {
 setupInitialNamespaces() {
     local context=${1}
     kubectl create namespace istio-system --context=kind-${context}
+    kubectl create namespace istio-ingress --context=kind-${context}
 }
 
 main() {

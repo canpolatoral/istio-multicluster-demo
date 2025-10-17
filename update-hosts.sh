@@ -11,12 +11,21 @@ BASE_DOMAIN=${BASE_DOMAIN:-multicluster.com}
 for cluster in "${CLUSTERS[@]}"; do
   ctx="kind-${cluster}"
 
-  # 1. Wait until Istio ingress gets an External-IP
-  kubectl --context "$ctx" -n istio-system \
+  # # 1. Wait until Istio ingress gets an External-IP
+  # kubectl --context "$ctx" -n istio-system \
+  #         wait --for=jsonpath='{.status.loadBalancer.ingress[0].ip}' \
+  #         svc/istio-ingressgateway --timeout=180s
+
+  # ip=$(kubectl --context "$ctx" -n istio-system \
+  #              get svc/istio-ingressgateway \
+  #              -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+                 # 1. Wait until Istio ingress gets an External-IP
+  kubectl --context "$ctx" -n istio-ingress \
           wait --for=jsonpath='{.status.loadBalancer.ingress[0].ip}' \
           svc/istio-ingressgateway --timeout=180s
 
-  ip=$(kubectl --context "$ctx" -n istio-system \
+  ip=$(kubectl --context "$ctx" -n istio-ingress \
                get svc/istio-ingressgateway \
                -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
